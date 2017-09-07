@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './table.js';
-import $ from 'jquery'
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
 
-class ProductLister extends React.Component {
+class Products extends React.Component {
     constructor() {
         super();
         this.state = { products: [] };
+
     }
+    
+    handleClick(event) {
+    event.preventDefault();
+    console.log("Hazem");
+  }
     
     componentDidMount() {
         fetch('http://localhost:5000/products')
             .then(response => response.json())
             .then(json=> {
-              console.log(json);
                 this.setState({products: json });
             });
     }
@@ -26,7 +29,7 @@ class ProductLister extends React.Component {
           <div>
           <h1>Products</h1>
            <div className="tbl-header">
-              <table cellpadding="0" cellspacing="0" border="0">
+              <table cellPadding="0" cellSpacing="0">
                 <thead>
                   <tr>
                   <th>Product ID</th>
@@ -42,21 +45,19 @@ class ProductLister extends React.Component {
             </div>
             <div className="tbl-content">
                 
-                <table cellpadding="0" cellspacing="0" border="0">
+                <table cellPadding="0" cellSpacing="0">
                 <tbody>
                 {
                   this.state.products.map(function(product){
                     return (
-                      // <li key={product.id}><span>{product.name}</span></li>
-                    
-                        <tr>
+                        <tr key={product.id}>
                           <td>{product.id}</td>
                           <td>{product.name}</td>
                           <td>{product.serialNumber}</td>
                           <td>{product.quantity}</td>
                           <td>{product.price}</td>
                           <td>{product.dateAdded}</td>
-                          <td><span className="fa fa-trash fa-2x"> </span></td>
+                          <td><span className="fa fa-trash fa-2x" ></span></td>
                         </tr>
                     )
                   })
@@ -64,9 +65,9 @@ class ProductLister extends React.Component {
               </tbody>
               </table>
             </div>
-            <button type="button" className="btn-class">Add New Product</button>
+            <button type="button" className="btn-class" onClick={this.handleClick.bind(this)}>Add New Product</button>
             </div>
         );
     }
 }
-export default ProductLister;
+export default Products;
