@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import './table.js';
 import $ from 'jquery'
-// import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 
 
 class ProductLister extends React.Component {
@@ -56,7 +56,7 @@ class ProductLister extends React.Component {
                           <td>{product.quantity}</td>
                           <td>{product.price}</td>
                           <td>{product.dateAdded}</td>
-                          <td><button type="button" className="fa fa-trash-o">Delete Product</button></td>
+                          <td><span className="fa fa-trash fa-2x"> </span></td>
                         </tr>
                     )
                   })
