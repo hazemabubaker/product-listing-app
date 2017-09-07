@@ -64,6 +64,7 @@ class ProductLister extends React.Component {
               </tbody>
               </table>
             </div>
+            <button type="button" className="btn-class">Add New Product</button>
             </div>
         );
     }
