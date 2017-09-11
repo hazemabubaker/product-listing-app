@@ -107,8 +107,8 @@ export default class Products extends React.Component {
         $.ajax({
         url: 'http://localhost:5000/products/' + id,
         type: 'DELETE',
-        success: swal('Deleted!', 'Product has been deleted.', 'success')
-        // error: swal("Oops...", "Deleting product failed",  "error")
+        success: function (){swal('Deleted!', 'Product has been deleted.', 'success')},
+        error: function (){swal("Oops...", "Deleting product failed",  "error")}
       });
     });
   }
