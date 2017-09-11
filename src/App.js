@@ -1,69 +1,21 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 import './table.js';
 import '../node_modules/font-awesome/css/font-awesome.min.css'; 
 import '../node_modules/sweetalert2/dist/sweetalert2.css'; 
 import swal from '../node_modules/sweetalert2/dist/sweetalert2.js'; 
-import $ from 'jquery'; 
-
-
-export class Modal extends React.Component {
-  render() {
-    if (this.props.isOpen === false)
-      return null
-
-    let modalStyle = {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-      zIndex: '9999',
-      background: '#FFFFFF',
-      width: '400px',
-      height: '500px',
-      padding: '10px',
-      border: '1px solid',
-      borderRadius: '10px',
-      borderColor: '#d5d9e0'
-    }
-
-    let backdropStyle = {
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      top: '0px',
-      left: '0px',
-      zIndex: '9998',
-      background: 'rgba(0, 0, 0, 0.3)'
-    }
-
-    return (
-      <div>
-        <div style={modalStyle}>{this.props.children}</div>
-        <div style={backdropStyle} onClick={e => this.close(e)}/>}
-      </div>
-    )
-    
-  }
-
-  close(e) {
-    e.preventDefault()
-
-    if (this.props.onClose) {
-      this.props.onClose()
-    }
-  }
-}
+import $ from 'jquery';
+import Modal from './Modal.js';
 
 export default class Products extends React.Component {
     constructor() {
         super();
         this.state = { products: [], isModalOpen: false };
-        this.addProduct = this.addProduct.bind(this);
+        this.handleProduct = this.handleProduct.bind(this);
 
     }
 
-    addProduct(e) {
+    handleProduct(e) {
       
       const name = (this.refs.name).value;
       const serialNumber = (this.refs.serialNumber).value;
@@ -113,7 +65,7 @@ export default class Products extends React.Component {
     });
   }
     
-    componentDidMount() {
+  componentDidMount() {
         fetch('http://localhost:5000/products')
             .then(response => response.json())
             .then(json=> {
@@ -121,9 +73,9 @@ export default class Products extends React.Component {
             });
     }
     
-    openModal() {
-    this.setState({ isModalOpen: true })
-    }
+  openModal() {
+  this.setState({ isModalOpen: true })
+  }
 
   closeModal() {
     this.setState({ isModalOpen: false })
@@ -161,7 +113,7 @@ export default class Products extends React.Component {
                           <td>{product.quantity}</td>
                           <td>{product.price}</td>
                           <td>{product.dateAdded}</td>
-                          <td><span onClick={() => { this.handleDelete(product.id) }} className="fa fa-trash fa-2x"></span></td>
+                          <td><span onClick={() => { this.handleDelete(product.id) }} className="fa fa-trash fa-2x" title="Delete"></span></td>
                         </tr>
                     )
                   })
@@ -172,7 +124,7 @@ export default class Products extends React.Component {
             </div>
             
             <div>
-            <form onSubmit={this.addProduct}>
+            <form onSubmit={this.handleProduct}>
               
               <button type="button" className="btn-class" onClick={() => this.openModal()}>Add New Product</button>
               
