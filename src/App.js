@@ -206,7 +206,7 @@ export default class Products extends React.Component {
                 <input type="date" id="dateAdded" ref="dateAdded" required/> <br />
                 <button type="submit" className="btn-class">{strings.add}</button>
               </Modal>
-              </form>
+            </form>
             </div>
           </div>
         );
