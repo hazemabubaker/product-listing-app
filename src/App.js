@@ -68,6 +68,7 @@ export default class Products extends React.Component {
         this.handleProduct = this.handleProduct.bind(this);
 
     }
+    
     switchLanguage() {
       if (strings.getLanguage() === 'en') {
         strings.setLanguage('ar');
@@ -144,7 +145,7 @@ export default class Products extends React.Component {
       this.setState({ isModalOpen: false })
     }
     
-      render() {        
+    render() {        
         return(
           <div dir={divDirection}>
           <input type="button" onClick={() => this.switchLanguage()} value={strings.language} className="btn-class"/> 
